@@ -1,0 +1,23 @@
+{
+  "name": "skx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmartKX/skx.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SmartKX/skx/issues"
+  },
+  "homepage": "https://github.com/SmartKX/skx#readme",
+  "dependencies": {
+    "eth-crypto": "^1.3.2",
+    "web3": "^1.0.0-beta.46"
+  }
+}
