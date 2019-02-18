@@ -1,8 +1,8 @@
 {
   "ropsten": {
   	"proxy": {
-  		"address": "0xf09E46db1a1a6A2354bcC2Cdd14813b888A22283",
-  		"abi": [{"constant":false,"inputs":[{"name":"_id","type":"uint8"},{"name":"_client","type":"address"},{"name":"_contract","type":"address"}],"name":"addContract","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOp","type":"address"},{"name":"_active","type":"bool"}],"name":"setOperator","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint8"},{"name":"_client","type":"address"}],"name":"getContracts","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]
+  	  "address": "0xf09E46db1a1a6A2354bcC2Cdd14813b888A22283",
+  	  "abi": [{"constant":false,"inputs":[{"name":"_id","type":"uint8"},{"name":"_client","type":"address"},{"name":"_contract","type":"address"}],"name":"addContract","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOp","type":"address"},{"name":"_active","type":"bool"}],"name":"setOperator","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint8"},{"name":"_client","type":"address"}],"name":"getContracts","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]
   	} 
   }
 }
