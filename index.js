@@ -1,16 +1,18 @@
 function skx () {
-	const Web3 = require('web3');
-	const EthCrypto = require('eth-crypto');
 
 	// Config Files / Contract Locations & ABI
 	const acct = require('./accounts.json');
 	const config = require('./config.json');
 	const contracts = require('./inc/contracts.json');
 
-	var web3 = new Web3(new Web3.providers.HttpProvider(config.rpcUrls[config.network]));
+	const Web3 = require('web3');
+	let web3 = new Web3(new Web3.providers.HttpProvider(config.rpcUrls[config.network]));
 
-	let privKey = acct[config.network][0].privateKey;
-	let pubAddr = acct[config.network][0].publicAddr;
+	const ethcrypto = require('eth-crypto');
+
+	let privKey = acct[config.network][0].privateKey; // stored in accounts.json
+	let pubKey = ethcrypto.publicKeyByPrivateKey(privKey); // derived from private key, not stored in accounts.json
+	let pubAddr = ethcrypto.publicKey.toAddress(pubKey); // derived from public key, not stored in accounts.json
 
 	let proxy = new web3.eth.Contract(contracts[config.network].proxy.abi, contracts[config.network].proxy.address);
 
@@ -43,19 +45,39 @@ function skx () {
 		});
 	};
 
+	function encrypt (msg) {
+		return ethcrypto.encryptWithPublicKey(pubKey, msg);
+	};
+
+	function decrypt (encryptedMsg, compressed = false) {
+		if (compressed == true) {
+			return ethcrypto.cipher.parse(encryptedMsg)
+				.then((r) => {
+					ethcrypto.decryptWithPrivateKey(privKey,r);
+				});
+		} else {
+			return ethcrypto.decryptWithPrivateKey(privKey,encryptedMsg);
+		}
+	};
+
+
+
 	return {
-		"privKey": privKey,
-		"pubAddr": pubAddr,
-		"contracts": contracts,
-		"config": config,
-		"acct": acct,
-		"network": config.network,
+		"privKey": privKey, 					// String
+		"pubKey": pubKey,							// String
+		"pubAddr": pubAddr, 					// String
+		"contracts": contracts, 			// Object
+		"config": config,				 			// Object
+		"acct": acct,									// Object
+		"network": config.network,		// String
 		"proxy": {
-			"addr": contracts[config.network].proxy.address,
-			"abi": contracts[config.network].proxy.abi,
-			"getContracts": getContracts
+			"addr": contracts[config.network].proxy.address,	// String
+			"abi": contracts[config.network].proxy.abi,				// Object
+			"getContracts": getContracts											// Function
 		},
-		"getBalance": getBalance
+		"getBalance": getBalance,			// Function
+		"encrypt": encrypt,						// Function
+		"decrypt": decrypt						// Function
 	}
 
 };
