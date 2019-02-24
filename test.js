@@ -1,10 +1,18 @@
-let skx = require('./index.js');
+const skx = require('./index.js');
+const chalk = require ('chalk');
 
-console.log(skx.network);
+function log(title, msg) {
+	console.log(`${chalk.green(title)}\n${typeof msg} ${JSON.stringify(msg, null, 2)}\n`);
+}
 
-let a = 
-skx.getBalance().then(r => console.log('Balances\n' + JSON.stringify(r)));
-skx.proxy.getContracts(0).then(r => console.log('Contract Addresses (' + r.length + ')\n' + JSON.stringify(r)));
+// Show Balance
+skx.getBalance().then(r => log('Balances', r));
 
-skx.encrypt('foobar').then(r => console.log('Encrypt\n' + JSON.stringify(r)));
-skx.encrypt('foobar').then(r => skx.decrypt(r)).then(r => console.log(r));
+// Get contract addresses from AppId 0
+skx.proxy.getContracts(0).then(r => log(`Contract Addresses (${r.length})`, r));
+
+// Encrypt "foobar"
+skx.encrypt('foobar').then(r => log('Encrypt', r));
+
+// Encrypt, then decrypt "foobar", round trip
+skx.encrypt('foobar').then(r => skx.decrypt(r)).then(r => log('Round trip encrypt, decrypt', r));

@@ -25,7 +25,6 @@ function skx () {
 						wei: result
 					});
 				} else {
-					console.log('Error: ', error); // Should dump errors here
 					reject(error);
 				}
 			});
@@ -38,7 +37,6 @@ function skx () {
 				if (!error) {
 				  resolve(result);
 				} else {
-					console.log('Error: ', error); // Should dump errors here
 					reject(error)
 				}
 			});
@@ -60,8 +58,6 @@ function skx () {
 		}
 	};
 
-
-
 	return {
 		"privKey": privKey, 					// String
 		"pubKey": pubKey,							// String
@@ -75,6 +71,13 @@ function skx () {
 			"abi": contracts[config.network].proxy.abi,				// Object
 			"getContracts": getContracts											// Function
 		},
+		"household": [
+			{
+				"addr": contracts[config.network].proxy.address,	// String
+				"abi": contracts[config.network].proxy.abi,				// Object
+				"getContracts": getContracts											// Function
+			}
+		]
 		"getBalance": getBalance,			// Function
 		"encrypt": encrypt,						// Function
 		"decrypt": decrypt						// Function
